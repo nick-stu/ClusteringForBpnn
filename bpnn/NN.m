@@ -39,5 +39,5 @@ for i = 1 : s
     end
 end
 accuracy=correctNum / validNum;
-fprintf('NN: %.4f\n',accuracy);
+fprintf('%.4f\n',accuracy);
 % fprintf('%d/%d\n', correctNum , validNum);
