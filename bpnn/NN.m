@@ -3,7 +3,7 @@ function [accuracy, net ] = NN( trainData, testData, testLabel )
 trainData = featureNormalize(trainData);
 testData = featureNormalize(testData);
 
-% 生成训练标签
+%% 生成训练标签
 rows = size(trainData, 1);
 singleNum = rows / 9;
 trainLabel = zeros(rows, 9);
