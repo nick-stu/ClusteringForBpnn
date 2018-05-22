@@ -13,7 +13,7 @@ function [ mdl ] = clustering_offset_nearest( data ,isPlot)
     p_label = 1:num; % data标志序列
     [avgTotal,std]=classStatus(data);
     threshold = avgTotal-std; % 这里是平均距离
-    mergeThreshold = threshold*1.05;
+    mergeThreshold = threshold*1.3;
 %     fprintf('threshold: %s ',threshold);
     %% 找出两两距离最小的两个点
     D = pdist2(data, data);
