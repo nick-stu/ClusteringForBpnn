@@ -1,9 +1,9 @@
-function[totalAvg]=offsetAllMain()
+function[totalAvg]=offsetAllMain_contrast()
 
 clear;% clc;
 warning off;
 addpath(genpath(pwd));
-mode = 'new';
+mode = 'contrast';
 fprintf('----Mode %s----\n',mode);
 basePath = './ÇÃ»÷Æ«ÒÆÊý¾Ý/';
 dirs = dir(basePath);
@@ -26,7 +26,13 @@ for x=1:size(dirs, 1)
     right = decimate_data(1:sampleNum, :);
     load([basePath, dirs(x).name, '/center/centerdecimate_data_0.6k.mat']);
     center = decimate_data(1:sampleNum, :);
-    
+    %% GCC
+%     over=BatchGCC(over);
+%     below=BatchGCC(below);
+%     left=BatchGCC(left);
+%     right=BatchGCC(right);
+%     center=BatchGCC(center);
+
     %% psd data
      psdData1 = PSD(over, 600);
      psdData2 = PSD(below, 600);
@@ -57,15 +63,10 @@ for x=1:size(dirs, 1)
     testLabel = GenerateNNLabel(size(testData, 1));
     
     %% test
-%     if strcmp(mode,'old')
-        fprintf('old:');
-        [accuracy1,~]=NN(trainData, testData, testLabel);
-%     elseif strcmp(mode,'new')
-        fprintf('new:');
-        [accuracy2,~]=NN_New(trainData, testData, testLabel);
-%     else
-%         disp("wrong!!!");
-%     end
+    fprintf('old:');
+    [accuracy1,~]=NN(trainData, testData, testLabel);
+    fprintf('new:');
+    [accuracy2,~]=NN_New(trainData, testData, testLabel);
     tmp=[accuracy1 accuracy2];
     accuracyMat=[accuracyMat; tmp];
 end
