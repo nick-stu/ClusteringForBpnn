@@ -27,7 +27,7 @@ for i = 1 : s
     if m > 0
         index=tag(index);
         validNum = validNum + 1;
-        if((size(testLabel, 2) == 9 && testLabel(i, index) == 1))% || index  == testLabel(i))
+        if testLabel(i, index) == 1% || index  == testLabel(i))
             correctNum = correctNum + 1 ; 
         end
     else
