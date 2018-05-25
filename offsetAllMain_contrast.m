@@ -1,4 +1,4 @@
-function[totalAvg]=offsetAllMain_contrast()
+function[oldMat,newMat]=offsetAllMain_contrast()
 
 clear;% clc;
 warning off;
@@ -9,6 +9,7 @@ basePath = './ÇÃ»÷Æ«ÒÆÊý¾Ý/';
 dirs = dir(basePath);
 sampleNum = 270;
 accuracyMat=[];
+oldMat=[];newMat=[];
 for x=1:size(dirs, 1)
     if (dirs(x).name(1) == '.')
         continue;
@@ -67,9 +68,8 @@ for x=1:size(dirs, 1)
     [accuracy1,~]=NN(trainData, testData, testLabel);
     fprintf('new:');
     [accuracy2,~]=NN_New(trainData, testData, testLabel);
-    tmp=[accuracy1 accuracy2];
-    accuracyMat=[accuracyMat; tmp];
+    oldMat=[oldMat accuracy1];
+    newMat=[newMat accuracy2];
 end
-totalAvg=mean(accuracyMat);
 % totalAvg=mean(accuracyMat);
 % fprintf('AVG: %.4f\n',totalAvg);
