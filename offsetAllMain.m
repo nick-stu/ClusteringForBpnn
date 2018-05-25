@@ -1,6 +1,5 @@
 function[totalAvg]=offsetAllMain()
-
-clear;% clc;
+clear; %clc;
 warning off;
 addpath(genpath(pwd));
 mode = 'new';
@@ -26,6 +25,13 @@ for x=1:size(dirs, 1)
     right = decimate_data(1:sampleNum, :);
     load([basePath, dirs(x).name, '/center/centerdecimate_data_0.6k.mat']);
     center = decimate_data(1:sampleNum, :);
+    
+    %% GCC
+%     over=BatchGCC(over);
+%     below=BatchGCC(below);
+%     left=BatchGCC(left);
+%     right=BatchGCC(right);
+%     center=BatchGCC(center);
     
     %% psd data
      psdData1 = PSD(over, 600);
@@ -54,8 +60,16 @@ for x=1:size(dirs, 1)
 %     trainData(:,col-length+1:end)=featureNormalize(trainData(:,col-length+1:end));
 %     testData(:,col-length+1:end)=featureNormalize(testData(:,col-length+1:end));
     %% generate label
-    testLabel = GenerateNNLabel(size(testData, 1));
-    
+     testLabel = GenerateNNLabel(size(testData, 1));
+    %% generate label without merge
+%     rows = size(testData, 1);
+%     singleNum = rows / (9*5);
+%     testLabel = zeros(rows, 45);
+%     for i=1:45
+%         for j=1:singleNum
+%             testLabel((i - 1) * singleNum + j, i) = 1;
+%         end
+%     end
     %% test
     if strcmp(mode,'old')
         [accuracy,~]=NN(trainData, testData, testLabel);
