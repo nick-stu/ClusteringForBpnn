@@ -27,12 +27,7 @@ for x=1:size(dirs, 1)
     right = decimate_data(1:sampleNum, :);
     load([basePath, dirs(x).name, '/center/centerdecimate_data_0.6k.mat']);
     center = decimate_data(1:sampleNum, :);
-    %% GCC
-%     over=BatchGCC(over);
-%     below=BatchGCC(below);
-%     left=BatchGCC(left);
-%     right=BatchGCC(right);
-%     center=BatchGCC(center);
+    frontSize=size(center,2);
 
     %% psd data
      psdData1 = PSD(over, 600);
@@ -67,7 +62,13 @@ for x=1:size(dirs, 1)
     fprintf('old:');
     [accuracy1,~]=NN(trainData, testData, testLabel);
     fprintf('new:');
+    %% GCC
+%     GCCData=BatchGCC( [trainData(:,1:frontSize) ; testData(:,1:frontSize)] );
+%     trainData(:,1:frontSize)=GCCData( 1:size(trainData,1),: );
+%     GCCData( 1:size(trainData,1),: )=[];
+%     testData(:,1:frontSize)=GCCData;
     [accuracy2,~]=NN_New(trainData, testData, testLabel);
+    
     oldMat=[oldMat accuracy1];
     newMat=[newMat accuracy2];
 end
