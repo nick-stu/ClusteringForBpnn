@@ -1,5 +1,6 @@
 function [ trainData, testData ] = AdjustableSplit( data , perTrainNum )
-%for NINEKEYS
+% 本函数将输入的九键样本矩阵，随机切分为两部分用于测试与训练。
+% 注：输入data矩阵行向量为信号，九键成块排列而非间隔排列
     perNum = size(data, 1) / 9;
     trainNum = perTrainNum * 9;
     perTestNum = perNum - perTrainNum;
