@@ -1,8 +1,8 @@
-function[totalAvg]=offsetAllMain()
+function[accuracyMat]=offsetAllMain()
 clear; %clc;
 warning off;
 addpath(genpath(pwd));
-mode = 'new';
+mode = 'old';
 fprintf('----Mode %s----\n',mode);
 basePath = './ÇÃ»÷Æ«ÒÆÊý¾Ý/';
 dirs = dir(basePath);
@@ -27,11 +27,13 @@ for x=1:size(dirs, 1)
     center = decimate_data(1:sampleNum, :);
     
     %% GCC
-%     over=BatchGCC(over);
-%     below=BatchGCC(below);
-%     left=BatchGCC(left);
-%     right=BatchGCC(right);
-%     center=BatchGCC(center);
+%     partSize=size(over,1);
+%     GCCData=BatchGCC([over ;below ;left ;right ; center]);
+%     over=GCCData(1:partSize,:); GCCData(1:partSize,:)=[];
+%     below=GCCData(1:partSize,:); GCCData(1:partSize,:)=[];
+%     left=GCCData(1:partSize,:); GCCData(1:partSize,:)=[];
+%     right=GCCData(1:partSize,:); GCCData(1:partSize,:)=[];
+%     center=GCCData(1:partSize,:); GCCData(1:partSize,:)=[];
     
     %% psd data
      psdData1 = PSD(over, 600);
