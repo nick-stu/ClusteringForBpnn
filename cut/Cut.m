@@ -15,8 +15,9 @@ for i=1:size(data,1)
     
     if i==18 
        fprintf('');
+%        close all;
     end
 end
 data=out;
-save( [dirPath type 'data80-350_69k'] ,'data');
+save( [dirPath type 'data90-350_69k'] ,'data');
 fprintf('ok\n');
