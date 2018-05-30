@@ -1,6 +1,7 @@
 function[trainLabel,tag]=getLabelsNew(trainData)
 %% 注意这里引用的聚类函数名称记得改
 %% 人工分类
+    fprintf('----manual sorting----\n');
     rows = size(trainData, 1);
     singleNum = rows / 9;
     tag=[]; trainLabel=[];
@@ -18,6 +19,7 @@ function[trainLabel,tag]=getLabelsNew(trainData)
     trainLabel(:, find( sum(trainLabel,1)==0) )=[];
     fprintf('classNum:%d\t',size(tag,2));
 %% 聚类
+%     fprintf('----clustering----\n');
 %     rows = size(trainData, 1);
 %     singleNum = rows / 9;
 %     tag=[]; trainLabel=[];
@@ -35,8 +37,9 @@ function[trainLabel,tag]=getLabelsNew(trainData)
 %         
 %         %% show detail
 %         for z=1:mdl.classNum
-%            fprintf('%d\n',length(find(mdl.label==z))); 
+%            fprintf('%d ',length(find(mdl.label==z))); 
 %         end
+%         fprintf('\n');
 %     end
 %     trainLabel(:, find( sum(trainLabel,1)==0) )=[];
 %     fprintf('classNum:%d\t',size(tag,2));
