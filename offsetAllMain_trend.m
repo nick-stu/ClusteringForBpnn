@@ -3,22 +3,21 @@ function[accuracy]=offsetAllMain_trend()
 clear; %clc;
 warning off;
 addpath(genpath(pwd));
-mode = 'new';
+mode = 'old';
 fprintf('----Mode %s----\n',mode);
 basePath = './chj/data/';
-dirs = dir(basePath);
-perTrainNum = 115;
-    
+perTrainNum = 117;
+fprintf('perTrainNum:%d\n',perTrainNum);
 %% original data
-load([basePath, 'decimate_overdata180-300_69k_0.6k.mat']);
+load([basePath, 'decimate_overdata90-350_69k_0.6k.mat']);
 over = decimate_data;
-load([basePath, 'decimate_belowdata180-300_69k_0.6k.mat']);
+load([basePath, 'decimate_belowdata90-350_69k_0.6k.mat']);
 below = decimate_data;
-load([basePath, 'decimate_leftdata180-300_69k_0.6k.mat']);
+load([basePath, 'decimate_leftdata90-350_69k_0.6k.mat']);
 left = decimate_data;
-load([basePath, 'decimate_rightdata180-300_69k_0.6k.mat']);
+load([basePath, 'decimate_rightdata90-350_69k_0.6k.mat']);
 right = decimate_data;
-load([basePath, 'decimate_centerdata180-300_69k_0.6k.mat']);
+load([basePath, 'decimate_centerdata90-350_69k_0.6k.mat']);
 center = decimate_data;
 %% GCC
 partSize=size(over,1);
@@ -73,4 +72,9 @@ elseif strcmp(mode,'new')
     [accuracy,~]=NN_New(trainData, testData, testLabel);
 else
     disp("wrong!!!");
+%% contrast
+% fprintf('before:\n');
+% [accuracy1,~]=NN(trainData, testData, testLabel);
+% fprintf('after:\n')
+% [accuracy2,~]=NN_New(trainData, testData, testLabel);
 end

@@ -2,7 +2,7 @@ function[accuracyMat]=offsetAllMain()
 clear; %clc;
 warning off;
 addpath(genpath(pwd));
-mode = 'old';
+mode = 'new';
 fprintf('----Mode %s----\n',mode);
 basePath = './ÇÃ»÷Æ«ÒÆÊý¾Ý/';
 dirs = dir(basePath);
@@ -28,7 +28,7 @@ for x=1:size(dirs, 1)
     
     %% GCC
 %     partSize=size(over,1);
-%     GCCData=BatchGCC([over ;below ;left ;right ; center]);
+%     GCCData=BatchGCC_ExternalBase([over ;below ;left ;right ; center]);
 %     over=GCCData(1:partSize,:); GCCData(1:partSize,:)=[];
 %     below=GCCData(1:partSize,:); GCCData(1:partSize,:)=[];
 %     left=GCCData(1:partSize,:); GCCData(1:partSize,:)=[];
