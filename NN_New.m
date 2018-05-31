@@ -4,8 +4,7 @@ function [accuracy, net ] = NN_New( trainData, testData, testLabel )
 % Éú³ÉÑµÁ·±êÇ©
 [trainLabel,tag] = getLabelsNew(trainData);
 
-trainData = featureNormalize(trainData);
-testData = featureNormalize(testData);
+[trainData,testData] = featureNormalize(trainData,testData);
 %%  Sample Disorder
 % rows = size(trainData,1);
 % index = randperm(rows,rows);

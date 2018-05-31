@@ -1,7 +1,6 @@
 function [accuracy, net ] = NN( trainData, testData, testLabel )
 % 使用神经网络
-trainData = featureNormalize(trainData);
-testData = featureNormalize(testData);
+% [trainData,testData] = featureNormalize(trainData,testData);
 
 %% 生成训练标签
 rows = size(trainData, 1);
