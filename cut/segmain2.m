@@ -4,7 +4,7 @@ dataOriginal=dataIn; %原始加载数据
 %% 切割脚步声的参数设置
 hpindex = 4000;%去掉高通滤波后前面若干个点
 min=30;
-high=90; low=350;
+high=20; low=300;
 Lm=9; %帧长
 Rm=6; %帧移
 ethresh = eth; %能量最小阈值
@@ -75,7 +75,7 @@ if beglen<min
     return;
 end
 
-for i=1:30
+for i=1:min
     data=[data;lpdata(ssbeg(i):ssend(i))];
 end
 out=data;

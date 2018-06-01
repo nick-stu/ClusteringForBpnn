@@ -13,11 +13,11 @@ for i=1:size(data,1)
        fprintf('Fail...\n');
     end
     
-    if i==18 
+    if mod(i,12)==0 
        fprintf('');
 %        close all;
     end
 end
 data=out;
-save( [dirPath type 'data90-350_69k'] ,'data');
+save( [dirPath type 'data20-300_69k'] ,'data');
 fprintf('ok\n');
