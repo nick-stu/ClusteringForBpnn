@@ -1,6 +1,6 @@
 function [accuracy, net ] = NN( trainData, testData, testLabel )
 % 使用神经网络
-% [trainData,testData] = featureNormalize(trainData,testData);
+[trainData,testData] = featureNormalize(trainData,testData);
 
 %% 生成训练标签
 rows = size(trainData, 1);
@@ -11,6 +11,13 @@ for i=1:9
         trainLabel((i - 1) * singleNum + j, i) = 1;
     end
 end
+%% multiple map label
+% if isMul==2
+%     tmp=trainLabel;trainLabel=[];
+%     for m=1:size(tmp,2)
+%         trainLabel=[trainLabel repmat(tmp(:,m),[1,2])];
+%     end
+% end
 %%  Sample Disorder
 % index = randperm(rows,rows);
 % trainData = trainData(index,:);

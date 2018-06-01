@@ -2,7 +2,7 @@ function [ net ] = NNTrain( trainData, trainLabel )
 % 训练神经网络
 %   trainData: 每行�?��样本数据
 %   trainLabel: 每行�?��样本标签，每行九�?    % 创建神经网络
-    net = newff(minmax(trainData'), [140 9], {'logsig', 'logsig'}, 'traingdx');
+    net = newff(minmax(trainData'), [140 size(trainLabel,2)], {'logsig', 'logsig'}, 'traingdx');
     % net =  newff(minmax(trainData'), [100 100 9], {'logsig', 'logsig', 'logsig'}, 'traingdx');
     % net =  newff(minmax(trainData'), [100 100 100 9], {'logsig', 'logsig', 'logsig', 'logsig'}, 'traingdx');
 
