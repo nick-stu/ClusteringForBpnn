@@ -1,8 +1,8 @@
-function [accuracy, net ] = NN_New( trainData, testData, testLabel )
+function [accuracy, net ] = NN_New( trainData, testData, testLabel, isClu )
 % 使用神经网络
 
 % 生成训练标签
-[trainLabel,tag] = getLabelsNew(trainData);
+[trainLabel,tag] = getLabelsNew(trainData,isClu);
 
 [trainData,testData] = featureNormalize(trainData,testData);
 %%  Sample Disorder
