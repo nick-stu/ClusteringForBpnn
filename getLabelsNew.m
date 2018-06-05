@@ -8,13 +8,14 @@ function[trainLabel,tag]=getLabelsNew(trainData,isClu)
         tag=[]; trainLabel=[];
         cursor=0;
         for i = 1:9
-            mdl.label=[ones(1,singleNum/5)*1 ones(1,singleNum/5)*2 ones(1,singleNum/5)*3 ones(1,singleNum/5)*4 ones(1,singleNum/5)*5];
+            mdl.label=...
+                [ones(1,singleNum/5)*1 ones(1,singleNum/5)*2 ones(1,singleNum/5)*3 ones(1,singleNum/5)*4 ones(1,singleNum/5)*5];
             label=zeros(singleNum,rows);
             for j=1:singleNum
                 label(j,mdl.label(j)+cursor)=1; 
             end
-            cursor=cursor+5;
-            tag=[tag repmat(i,[1,5])];
+            cursor=cursor+max(mdl.label);
+            tag=[tag repmat(i,[1,max(mdl.label)])];
             trainLabel=[trainLabel;label];
         end
         trainLabel(:, find( sum(trainLabel,1)==0) )=[];

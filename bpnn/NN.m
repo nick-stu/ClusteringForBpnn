@@ -12,10 +12,10 @@ for i=1:9
     end
 end
 %% multiple map label
-% if isMul==2
+% if isMul>1
 %     tmp=trainLabel;trainLabel=[];
 %     for m=1:size(tmp,2)
-%         trainLabel=[trainLabel repmat(tmp(:,m),[1,2])];
+%         trainLabel=[trainLabel repmat(tmp(:,m),[1,isMul])];
 %     end
 % end
 %%  Sample Disorder

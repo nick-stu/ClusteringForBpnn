@@ -1,23 +1,24 @@
-function[accuracy]=offsetAllMain_trend()
+function[accuracy1,accuracy2]=offsetAllMain_trend(perTrainNum)
 %% 观察精度趋势（关于样本数量），现每个键位的每个偏移类型共有样本120个
-clear; %clc;
+% clear; %clc;
 warning off;
+isClu = true;
 addpath(genpath(pwd));
 mode = 'old';
 fprintf('----Mode %s----\n',mode);
-basePath = './chj/data/';
-perTrainNum = 117;
+basePath = './chj/data/20-300/';
+% perTrainNum = 70;
 fprintf('perTrainNum:%d\n',perTrainNum);
 %% original data
-load([basePath, 'decimate_overdata90-350_69k_0.6k.mat']);
+load([basePath, 'decimate_overdata20-300_69k_0.6k.mat']);
 over = decimate_data;
-load([basePath, 'decimate_belowdata90-350_69k_0.6k.mat']);
+load([basePath, 'decimate_belowdata20-300_69k_0.6k.mat']);
 below = decimate_data;
-load([basePath, 'decimate_leftdata90-350_69k_0.6k.mat']);
+load([basePath, 'decimate_leftdata20-300_69k_0.6k.mat']);
 left = decimate_data;
-load([basePath, 'decimate_rightdata90-350_69k_0.6k.mat']);
+load([basePath, 'decimate_rightdata20-300_69k_0.6k.mat']);
 right = decimate_data;
-load([basePath, 'decimate_centerdata90-350_69k_0.6k.mat']);
+load([basePath, 'decimate_centerdata20-300_69k_0.6k.mat']);
 center = decimate_data;
 %% GCC
 partSize=size(over,1);
@@ -66,15 +67,18 @@ testData=mergeData_offset(testData1,testData2,testData3,testData4,testData5);
 %     end
 
 %% test
-if strcmp(mode,'old')
-    [accuracy,~]=NN(trainData, testData, testLabel);
-elseif strcmp(mode,'new')
-    [accuracy,~]=NN_New(trainData, testData, testLabel);
-else
-    disp("wrong!!!");
+% if strcmp(mode,'old')
+    [accuracy1,~]=NN(trainData, testData, testLabel);
+% elseif strcmp(mode,'new')
+    [accuracy2,~]=NN_New(trainData, testData, testLabel, isClu);
+% else
+%     disp("wrong!!!");
 %% contrast
 % fprintf('before:\n');
 % [accuracy1,~]=NN(trainData, testData, testLabel);
 % fprintf('after:\n')
 % [accuracy2,~]=NN_New(trainData, testData, testLabel);
+if isClu
+    fprintf('-----------------------------------Clustering--------------------------------------------\n');
+end
 end
