@@ -13,7 +13,7 @@ if K==3
         a=rand; b=rand; c=rand;
         for j=1:length(index)
             scatter3(data(index(j),1),data(index(j),2),data(index(j),3), Pointsize,[a b c],'filled');hold on;
-            text(data(index(j),1),data(index(j),2),data(index(j),3),num2str(label(index(j))));
+            text(data(index(j),1),data(index(j),2),data(index(j),3),num2str(label(index(j))), 'Color',[1-a,1-b,1-c]);
         end
     end
 elseif K==2
@@ -22,7 +22,7 @@ elseif K==2
         a=rand; b=rand; c=rand;
         for j=1:length(index)
             scatter(data(index(j),1),data(index(j),2), Pointsize,[a b c],'filled');hold on;
-            text(data(index(j),1),data(index(j),2),num2str(label(index(j))));
+            text(data(index(j),1),data(index(j),2),num2str(label(index(j))), 'Color',[1-a,1-b,1-c]);
         end
     end
 end
