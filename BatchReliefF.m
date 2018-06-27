@@ -1,6 +1,6 @@
-function [A,B]=BatchReliefF(trainData,testData)
+function [A,B]=BatchReliefF(trainData,testData,k)
 A=trainData;B=testData;
-[trainData,testData]=featureNormalize(trainData,testData);
+% [trainData,testData]=featureNormalize(trainData,testData);
 %% Species
 rows = size(trainData, 1);
 singleNum = rows / 9;
@@ -11,11 +11,9 @@ for i=1:9
     end
 end
 %% reliefF
-[ranked,weight] = relieff(trainData,trainLabel,10);
+[~,weight] = relieff(trainData,trainLabel,k);
 index=find(weight<0);
 %% weaken or removed
-A=A.*weight;
-B=B.*weight;
 A(:,index)=[];
 B(:,index)=[];
 bar(weight);
