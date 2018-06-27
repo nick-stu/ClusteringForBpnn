@@ -1,5 +1,5 @@
 function [data] = pcaPlotBasedonLabel(data,K,label,Pointsize)
-[data,~]=featureNormalize(data,[1]);
+[data,~]=featureNormalize(data,1);
 [eigenVectors,scores,eigenValues] = pca(data);
 transMatrix = eigenVectors(:,1:K);
 data = data*transMatrix;
