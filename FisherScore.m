@@ -1,53 +1,39 @@
-function [ FisherScore ] = FisherScore( input,WeiShu,YangBenShu,LeiShu )
+function [ score ] = FisherScore( data, people_num, interval )
 %UNTITLED2 此处显示有关此函数的摘要
     %导入数据
-    Originaldata=input;
-    EveryYangBenShu=YangBenShu/LeiShu;%每一类样本的数目
-    
-    %计算每一维每一类的平均值
-    everyClassAverage = zeros(WeiShu,LeiShu);
-    sum = 0;
-    for i =1:WeiShu
-        for j = 1:YangBenShu
-            sum = sum + Originaldata(j,i);
-            if mod(j,EveryYangBenShu)==0
-                everyClassAverage(i,floor((j-1)/EveryYangBenShu+1))=sum/EveryYangBenShu;
-                sum=0;
-            end
-        end
+    dim = size(data, 2);
+    sample_size = size(data, 1);
+    per_num = sample_size / people_num;%每一类样本的数目
+
+    %计算每一维每????的平均??
+    everyClassAverage = zeros(people_num, dim);
+    for i=1:people_num
+        everyClassAverage(i, :) = mean(data((i - 1) * per_num + 1 : i * per_num, :));
     end
 
-    %计算每一维的总平均值
-    allAverage = zeros(WeiShu,1);
-    for i =1:WeiShu
-        sum=0;
-        for j=1:YangBenShu
-            sum = sum + Originaldata(j,i);
-        end
-        allAverage(i,1)=sum/YangBenShu;
-    end
+    %计算每一维的总平均??
+    allAverage = mean(data);
 
     %计算分子A
-    A=zeros(WeiShu,1);
-    for i=1:WeiShu
-        for j=1:LeiShu
-            A(i,1)=A(i,1)+(everyClassAverage(i,j)-allAverage(i,1))*(everyClassAverage(i,j)-allAverage(i,1));
-        end
-    end
+    A = mean((everyClassAverage - allAverage) .^ 2);
 
     %计算分母B
-    B=zeros(WeiShu,1);
-    for i=1:WeiShu
-        for j=1:YangBenShu
-            B(i,1)=B(i,1)+(Originaldata(j,i)-everyClassAverage(i,floor((j-1)/EveryYangBenShu)+1)) * (Originaldata(j,i)-everyClassAverage(i,floor((j-1)/EveryYangBenShu)+1));
-        end
+    B = zeros(1, dim);
+    for i=1:people_num
+        B(1, :) = B(1, :) + mean((data((i - 1) * per_num + 1 : i * per_num, :) - everyClassAverage(i, :)) .^ 2);
     end
+    B = B ./ people_num;
 
     %计算结果F
-    FisherScore = zeros(WeiShu,1);
-    for i=1:WeiShu
-        FisherScore(i,1)=A(i,1)/B(i,1);
-    end
+    tmp = A ./ B;
+    if interval == 1
+        score = tmp;
+    else
+        score = zeros(1, dim / interval);
 
+        for i=1:(dim / interval)
+            score(i) = mean(tmp((i - 1) * interval + 1: i * interval));
+        end
+    end
 end
 
