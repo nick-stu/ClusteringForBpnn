@@ -33,6 +33,10 @@ for x=1:size(dirs, 1)
         trainLabel = [trainLabel ;repmat(i,[20,1])];
         testLabel = [testLabel ;repmat(i,[10,1])];
     end
+    %% random index
+    idx=randperm(length(testLabel));
+    testLabel = testLabel(idx);
+    testData = testData(idx,:);
     %% test
     fprintf('old:');
     accuracy1 = CalAccuracy_KNN (trainData, testData, trainLabel, testLabel, k);
@@ -65,8 +69,8 @@ for x=1:size(dirs, 1)
     %% rmOutcast
 %     index=rmOutcastBasedonZscore(trainData);
     %% z-score
-%     [trainData,testData] = featureNormalize( trainData,testData );
-    accuracy2 = CalAccuracy_KNN (trainData, testData, trainLabel, testLabel, k);
+%     [trainData,testData] = featureNormalize( trainData,testData );  
+    accuracy2 = CalAccuracy_KNN_withUpdate (trainData, testData, trainLabel, testLabel, k);
 %     fprintf('%.4f\n',accuracy2);
     
     oldMat=[oldMat accuracy1];
