@@ -28,7 +28,8 @@ function[trainLabel,tag]=getLabelsNew(trainData,isClu)
         tag=[]; trainLabel=[];
         cursor=0;
         for i = 1:9
-            mdl=clustering_offset_nearest( trainData( (i-1)*singleNum+1 : i*singleNum,:),false );
+%             mdl=clustering_offset_nearest( trainData( (i-1)*singleNum+1 : i*singleNum,:),false );
+            mdl=clustering_offset_nearest_dtw( trainData( (i-1)*singleNum+1 : i*singleNum,:),false );
     %         mdl=clustering_offset_nearest_MhtD( trainData( (i-1)*singleNum+1 : i*singleNum,:),false );
             label=zeros(singleNum,rows);
             for j=1:singleNum
