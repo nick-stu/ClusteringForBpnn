@@ -2,7 +2,7 @@ close all;
 figure;plot(A');title('A');grid on;
 figure;plot(B');title('B');grid on;
 profit=mean(B(:))-mean(A(:));
-
+fprintf('%.f %.f\n',mean(A(:)),mean(A(:)));
 figure;
 subplot(3,1,1);plot(mean(B)-mean(A),'k');title(num2str(profit));
 hold on;grid on;
