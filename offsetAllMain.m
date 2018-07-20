@@ -2,7 +2,7 @@ function[accuracyMat]=offsetAllMain()
 clear; %clc;
 warning off;
 addpath(genpath(pwd));
-mode = 'new';
+mode = 'old';
 fprintf('----Mode %s----\n',mode);
 basePath = './ÇÃ»÷Æ«ÒÆÊý¾Ý/';
 dirs = dir(basePath);
