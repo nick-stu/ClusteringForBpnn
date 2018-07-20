@@ -8,7 +8,6 @@ fprintf('----Mode %s----\n',mode);
 basePath = './ÇÃ»÷Æ«ÒÆÊý¾Ý/';
 dirs = dir(basePath);
 sampleNum = 270;
-accuracyMat=[];
 oldMat=[];newMat=[];
 for x=1:size(dirs, 1)
     if (dirs(x).name(1) == '.')
@@ -63,12 +62,34 @@ for x=1:size(dirs, 1)
     [accuracy1,~]=NN(trainData, testData, testLabel);
     fprintf('new:');
     %% GCC
-%     GCCData=BatchGCC( [trainData(:,1:frontSize) ; testData(:,1:frontSize)] );
+%     GCCData=batchGCC( [trainData(:,1:frontSize) ; testData(:,1:frontSize)] );
 %     trainData(:,1:frontSize)=GCCData( 1:size(trainData,1),: );
 %     GCCData( 1:size(trainData,1),: )=[];
 %     testData(:,1:frontSize)=GCCData;
-    [accuracy2,~]=NN_New(trainData, testData, testLabel);
+    %% ReliefF
+%     [trainData,testData]=BatchReliefF(trainData(:,1:frontSize),testData(:,1:frontSize));
+    %% Pow
+%     trainData(:,40:frontSize)=trainData(:,40:frontSize)*0.05;
+%     testData(:,40:frontSize)=testData(:,40:frontSize)*0.05;
+%     trainData=trainData(:,1:frontSize);
+%     testData=testData(:,1:frontSize);
+    trainData=trainData*20;
+    testData=testData*20;
+    %% rePsd
+%     psdData1 = PSD(trainData, 600);
+%     psdData2 = PSD(testData, 600);
+%     trainData = cat(2,trainData,psdData1);
+%     testData = cat(2,testData,psdData2);
     
+    %% multiple map label
+%     tmp=testLabel;testLabel=[];
+%     for m=1:size(tmp,2)
+%         testLabel=[testLabel repmat(tmp(:,m),[1,4])];
+%     end
+% 
+    
+    [accuracy2,~]=NN(trainData, testData, testLabel);
+
     oldMat=[oldMat accuracy1];
     newMat=[newMat accuracy2];
 end
