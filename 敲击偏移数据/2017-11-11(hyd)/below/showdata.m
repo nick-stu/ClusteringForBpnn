@@ -1,9 +1,9 @@
 clc;clear;close all
 %读取.txt文件数据
 % data1=dlmread('4-1.txt');
-data1=dlmread('channel_0.txt');
+% data1=dlmread('channel_0.txt');
 % data1=dlmread('X1-1.txt');
-% data1=dlmread('5-3.txt');
+data1=dlmread('5-3.txt');
 
 figure(1);     
 % subplot(311);

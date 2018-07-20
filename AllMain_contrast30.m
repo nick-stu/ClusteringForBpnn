@@ -32,7 +32,7 @@ for x=1:size(dirs, 1)
     [accuracy1,~]=NN(trainData, testData, testLabel);
     fprintf('new:');
 
-    %% multiple map label
+    %% Multiple map label
 %     tmp=testLabel;testLabel=[];
 %     for m=1:size(tmp,2)
 %         testLabel=[testLabel repmat(tmp(:,m),[1,Mul])];
@@ -51,10 +51,13 @@ for x=1:size(dirs, 1)
 %     psdData2 = PSD(testData, 600);
 %     trainData = cat(2,trainData,psdData1);
 %     testData = cat(2,testData,psdData2);
-    score = FisherScore( trainData, 9, 1 );
-    trainData=score.*trainData;
-    testData=score.*testData;
-    [accuracy2,~]=NN(trainData, testData, testLabel);
+    %% Fisher
+%     score = calVariance( trainData, 9, 1 );
+%     trainData=score.*trainData;
+%     testData=score.*testData;
+    %% rmOutcast
+%     index=rmOutcastBasedonZscore(trainData);
+    [accuracy2,~]=NN(trainData, testData, testLabel,index);
     
     oldMat=[oldMat accuracy1];
     newMat=[newMat accuracy2];
