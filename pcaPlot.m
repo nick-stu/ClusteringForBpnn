@@ -1,5 +1,5 @@
 function [data] = pcaPlot(data,K)
-data=featureNormalize(data);
+[data,~]=featureNormalize(data,0);
 [eigenVectors,scores,eigenValues] = pca(data);
 transMatrix = eigenVectors(:,1:K);
 data = data*transMatrix;
@@ -14,5 +14,5 @@ for i=1:60
 %         text(data(i,1),data(i,2),data(i,3), num2str(label(i)));
     end
 end
-title('PCA');
+title('PCA based on Type');
 end
