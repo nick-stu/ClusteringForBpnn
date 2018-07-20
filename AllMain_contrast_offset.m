@@ -83,7 +83,7 @@ for x=1:size(dirs, 1)
 %     score = calVariance( trainData, 9);
 %     trainData=score.*trainData;
 %     testData=score.*testData;
-    %% fisherNew
+    %% reliefFscore
     score = reliefFscore( trainData, trainLabel);
     trainData=score.*trainData;
     testData=score.*testData;
