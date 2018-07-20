@@ -84,7 +84,7 @@ for x=1:size(dirs, 1)
 %     trainData=score.*trainData;
 %     testData=score.*testData;
     %% reliefFscore
-    score = reliefFscore( trainData, trainLabel);
+    score = reliefFscore( trainData, trainLabel, k);
     trainData=score.*trainData;
     testData=score.*testData;
     %% RePsd
