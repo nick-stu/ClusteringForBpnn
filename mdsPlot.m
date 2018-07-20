@@ -9,5 +9,5 @@ for i=1:60
         scatter3(data(i,1),data(i,2),data(i,3), 100,'b','filled');
     end
 end
-title('MDS');
+title('MDS based on Type');
 end
