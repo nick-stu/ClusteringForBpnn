@@ -18,10 +18,15 @@ for x=1:size(dirs, 1)
     data=[hard;gentle];
     %% 是否归一化
     originData=data;
-    data=featureNormalize(data);% 归一化
-%     mdl=clustering_dis(data);
-    mdl=clustering(data,false);
+%     [data,~]=featureNormalize(data,0);% 归一化
+    mdl=clustering_dis(data);
+%     mdl=clustering(data,false);
+%     mdl=clustering_offset_nearest(data,false);
 %     densitySituation(data);
-    pcaPlot(originData,3);
-    mdsPlot(originData,3);
+    outlabel=[ones(1,30)*1 ones(1,30)*2 ];
+%     mdsPlotBasedonLabel(originData,3,outlabel,100);
+    pcaPlotBasedonLabel(originData,3,outlabel,100);
+
+%     mdsPlotBasedonLabel(originData,3,mdl.label,100);
+    pcaPlotBasedonLabel(originData,3,mdl.label,100);
 end
