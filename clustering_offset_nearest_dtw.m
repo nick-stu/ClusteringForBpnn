@@ -108,7 +108,7 @@ function [ mdl ] = clustering_offset_nearest_dtw( data ,isPlot)
         tmp=[data1;data(find(label == min_j), :)];
         [densityMin,~]=classStatus_dtw(tmp);
 %         fprintf('%.4f\n',densityMin);
-        if densityMin < mergeThreshold || size(data1,1)<=fix(num/15)
+        if densityMin < mergeThreshold || size(data1,1)<=5
             label(label == i) = min_j;
         end
     end    
