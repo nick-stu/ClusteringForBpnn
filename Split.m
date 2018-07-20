@@ -1,10 +1,10 @@
-function [ trainData, testData ] = Split( data )
+function [ trainData, testData ] = Split( data, Tsize )
 %   split data into trainData(60%) and testData(40%)
 %   Detailed explanation goes here
     % useful varï¼?    
     perNum = size(data, 1) / 9;
 %     perTrainNum = perNum * 0.6; % trainData percent
-     perTrainNum = 20; % trainData percent
+     perTrainNum = Tsize; % trainData percent
     trainNum = perTrainNum * 9;
     perTestNum = perNum - perTrainNum;
     testNum = perTestNum * 9;
